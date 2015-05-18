@@ -117,11 +117,12 @@ static int yum_build_rpm(const struct manifest *manifest)
 		 "-D\"__arch_install_post "
 		 "/usr/lib/rpm/check-rpaths /usr/lib/rpm/check-buildroot\" "
 		 "-D\"_rpmdir %s\" "
+		 "-D\"_topdir %s\" "
 		 "--rebuild %s/%s-%s-%s.src.rpm\n",
 		 quiet, 
 		 manifest->package.name, manifest->package.version,
 		 manifest->package.release,
-		 output_path, output_path,
+		 output_path, workdir,output_path,
 		 manifest->package.name, manifest->package.version,
 		 manifest->package.release);
 	LOG(INFO, "Building container binary rpm\n");
