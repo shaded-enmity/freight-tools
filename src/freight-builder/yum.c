@@ -38,7 +38,7 @@
 
 #define BTRFS_SUPER_MAGIC     0x9123683E
 
-static char worktemplate[256];
+static char worktemplate[512];
 static char *workdir;
 static char tmpdir[1024];
 
@@ -137,8 +137,12 @@ static int yum_build_rpm(const struct manifest *manifest)
 
 static int yum_init(const struct manifest *manifest)
 {
-	getcwd(worktemplate, 256);
 	struct statfs buf;
+
+	if (manifest->opts.workdir)
+		strcpy(worktemplate, manifest->opts.workdir);
+	else
+		getcwd(worktemplate, 256);
 
 	if (statfs(worktemplate, &buf) == -1) {
 		LOG(ERROR, "Cannnot interrogate working directory %s: %s\n",
