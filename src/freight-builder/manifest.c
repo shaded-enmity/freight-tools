@@ -34,6 +34,7 @@
 void release_repos(struct repository *repos) {
 	struct repository *r = repos, *k = NULL;
 	while (r) {
+		printf(" *** r: 0x%p k: 0x%p", r, k);
 		k = r;
 		free(r->name);
 		free(k->url);
@@ -46,6 +47,7 @@ void release_repos(struct repository *repos) {
 void release_rpms(struct rpm *rpms) {
 	struct rpm *r = rpms, *k = NULL;
 	while (r) {
+		printf(" *** r: 0x%p k: 0x%p", r, k);
 		k = r;
 		free(r->name);
 		r = r->next;
