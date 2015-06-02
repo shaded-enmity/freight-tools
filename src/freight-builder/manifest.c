@@ -191,6 +191,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 	config_setting_t *rpms = config_lookup(config, "manifest");
 	config_setting_t *rpm_config;
 	__free_rpms struct rpm *rpmp = NULL;
+	struct rpm *last = NULL;
 	int i = 0;
 	size_t alloc_size;
 	const char *name;
@@ -215,8 +216,12 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 		if (!rpmp->name)
 			return -ENOMEM;
 
-		rpmp->next = manifest->rpms;
-		manifest->rpms = rpmp;	
+		rpmp->next = NULL;
+		if (last)
+			last->next = rpmp;
+		else
+			manifest->rpms = rpmp;
+		last = rpmp;
 		
 		i++;
 	}
