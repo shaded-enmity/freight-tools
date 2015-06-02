@@ -219,7 +219,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 		if (!rpmp->name)
 			return -ENOMEM;
 
-		printf(" ** %s [%p %p]\n", rpmp->name, rpmp, rpmp->name);
+		printf(" ** %s [%p %p %p]\n", rpmp->name, rpmp, last, rpmp->name);
 
 		rpmp->next = NULL;
 		if (last)
