@@ -38,6 +38,7 @@ void release_repos(struct repository *repos) {
 		free(r->name);
 		free(k->url);
 		r = r->next;
+		printf(" *** r: 0x%p k: 0x%p", r, k);
 		free(k);
 	}
 }
@@ -48,6 +49,7 @@ void release_rpms(struct rpm *rpms) {
 		k = r;
 		free(r->name);
 		r = r->next;
+		printf(" *** r: 0x%p k: 0x%p", r, k);
 		free(k);
 	}
 }
