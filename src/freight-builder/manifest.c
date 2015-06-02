@@ -34,12 +34,12 @@
 void release_repos(struct repository *repos) {
 	struct repository *r = repos, *k = NULL;
 	while (r) {
-		printf(" *** r: 0x%p k: 0x%p\n", r, k);
+		printf(" *** r: %p k: %p\n", r, k);
 		k = r;
 		free(r->name);
 		free(k->url);
 		r = r->next;
-		printf(" *** r: 0x%p k: 0x%p\n", r, k);
+		printf(" *** r: %p k: %p\n", r, k);
 		free(k);
 	}
 }
@@ -47,11 +47,11 @@ void release_repos(struct repository *repos) {
 void release_rpms(struct rpm *rpms) {
 	struct rpm *r = rpms, *k = NULL;
 	while (r) {
-		printf(" *** r: 0x%p k: 0x%p\n", r, k);
+		printf(" *** r: %p k: %p\n", r, k);
 		k = r;
 		free(r->name);
 		r = r->next;
-		printf(" *** r: 0x%p k: 0x%p\n", r, k);
+		printf(" *** r: %p k: %p\n", r, k);
 		free(k);
 	}
 }
@@ -219,7 +219,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 		if (!rpmp->name)
 			return -ENOMEM;
 
-		printf(" ** %s [0x%p 0x%p]\n", rpmp->name, rpmp, last);
+		printf(" ** %s [%p %p]\n", rpmp->name, rpmp, rpmp->name);
 
 		rpmp->next = NULL;
 		if (last)
