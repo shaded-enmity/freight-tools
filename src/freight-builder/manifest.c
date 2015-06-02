@@ -135,7 +135,7 @@ static int parse_repositories(struct config_t *config, struct manifest *manifest
 	config_setting_t *repos = config_lookup(config, "repositories");
 	config_setting_t *repo, *tmp;
 	/*__free_repos */struct repository *repop = NULL;
-	struct repository *last = NULL;
+	struct repository *last = manifest->repos;
 	int i = 0;
 	const char *name, *url;
 
@@ -194,7 +194,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 	config_setting_t *rpms = config_lookup(config, "manifest");
 	config_setting_t *rpm_config;
 	/*__free_rpms*/ struct rpm *rpmp = NULL;
-	struct rpm *last = NULL;
+	struct rpm *last = manifest->rpms;
 	int i = 0;
 	const char *name;
 
