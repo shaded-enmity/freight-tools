@@ -135,7 +135,7 @@ static int parse_repositories(struct config_t *config, struct manifest *manifest
 	config_setting_t *repos = config_lookup(config, "repositories");
 	config_setting_t *repo, *tmp;
 	/*__free_repos */struct repository *repop = NULL;
-	struct repository *last = manifest->repos;
+	struct repository *last = NULL;
 	int i = 0;
 	const char *name, *url;
 
@@ -201,6 +201,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 	if (!rpms)
 		return 0;
 
+	printf("*-* *-*\n");
 	/*
  	 * Load up all the individual repository urls
  	 */
@@ -230,6 +231,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 		i++;
 	}
 
+	printf("*=* *=*\n");
 	rpmp = NULL;
 
 	return 0;
