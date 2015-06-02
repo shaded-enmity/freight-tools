@@ -34,12 +34,12 @@
 void release_repos(struct repository *repos) {
 	struct repository *r = repos, *k = NULL;
 	while (r) {
-		printf(" *** r: 0x%p k: 0x%p", r, k);
+		printf(" *** r: 0x%p k: 0x%p\n", r, k);
 		k = r;
 		free(r->name);
 		free(k->url);
 		r = r->next;
-		printf(" *** r: 0x%p k: 0x%p", r, k);
+		printf(" *** r: 0x%p k: 0x%p\n", r, k);
 		free(k);
 	}
 }
@@ -47,11 +47,11 @@ void release_repos(struct repository *repos) {
 void release_rpms(struct rpm *rpms) {
 	struct rpm *r = rpms, *k = NULL;
 	while (r) {
-		printf(" *** r: 0x%p k: 0x%p", r, k);
+		printf(" *** r: 0x%p k: 0x%p\n", r, k);
 		k = r;
 		free(r->name);
 		r = r->next;
-		printf(" *** r: 0x%p k: 0x%p", r, k);
+		printf(" *** r: 0x%p k: 0x%p\n", r, k);
 		free(k);
 	}
 }
@@ -137,7 +137,6 @@ static int parse_repositories(struct config_t *config, struct manifest *manifest
 	/*__free_repos */struct repository *repop = NULL;
 	struct repository *last = manifest->repos;
 	int i = 0;
-	size_t alloc_size;
 	const char *name, *url;
 
 	if (!repos)
@@ -197,7 +196,6 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 	/*__free_rpms*/ struct rpm *rpmp = NULL;
 	struct rpm *last = NULL;
 	int i = 0;
-	size_t alloc_size;
 	const char *name;
 
 	if (!rpms)
@@ -220,7 +218,7 @@ static int parse_rpms(struct config_t *config, struct manifest *manifest)
 		if (!rpmp->name)
 			return -ENOMEM;
 
-		printf(" ** %s", rpmp->name);
+		printf(" ** %s [0x%p 0x%p]\n", rpmp->name, rpmp, last);
 
 		rpmp->next = NULL;
 		if (last)
